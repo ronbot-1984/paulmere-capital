@@ -320,7 +320,10 @@ button {
 
 /* ---------- 4. Reveal animation ---------- */
 
-[data-reveal] {
+/* Scoped to .js (set by an inline script in <head>) so that if scripting is
+   unavailable or the bundle fails, nothing is left stranded at opacity 0. */
+
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
   transition:
@@ -330,18 +333,18 @@ button {
   will-change: opacity, transform;
 }
 
-[data-reveal="in"] {
+.js [data-reveal="in"] {
   opacity: 1;
   transform: none;
 }
 
-[data-reveal-mask] {
+.js [data-reveal-mask] {
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.1s var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-[data-reveal-mask="in"] {
+.js [data-reveal-mask="in"] {
   clip-path: inset(0 0 -12% 0);
 }
 

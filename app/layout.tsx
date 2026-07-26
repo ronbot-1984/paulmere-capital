@@ -77,6 +77,15 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
+      <head>
+        {/* Gates the entrance/reveal animations on scripting being available,
+            so the page is fully readable if the bundle never arrives. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js')`,
+          }}
+        />
+      </head>
       <body>
         <div className="grain" aria-hidden="true" />
         <a href="#main" className="skip">

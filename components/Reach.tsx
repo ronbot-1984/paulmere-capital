@@ -4,27 +4,57 @@ import { useEffect, useState } from "react";
 
 type Office = {
   city: string;
+  short: string;
   country: string;
   tz: string;
   role?: string;
   people: string;
   since: string;
-  /* position on the equirectangular map, % */
-  x: number;
-  y: number;
 };
 
 const OFFICES: Office[] = [
-  { city: "London", country: "United Kingdom", tz: "Europe/London", role: "Headquarters", people: "480", since: "1994", x: 48.6, y: 27.5 },
-  { city: "New York", country: "United States", tz: "America/New_York", people: "310", since: "1997", x: 27.5, y: 34.5 },
-  { city: "Zurich", country: "Switzerland", tz: "Europe/Zurich", people: "74", since: "2003", x: 51.5, y: 30.5 },
-  { city: "Singapore", country: "Singapore", tz: "Asia/Singapore", people: "128", since: "2005", x: 75.5, y: 55.5 },
-  { city: "Hong Kong", country: "SAR China", tz: "Asia/Hong_Kong", people: "96", since: "2007", x: 79.5, y: 44 },
-  { city: "Tokyo", country: "Japan", tz: "Asia/Tokyo", people: "58", since: "2010", x: 86, y: 36.5 },
-  { city: "Abu Dhabi", country: "United Arab Emirates", tz: "Asia/Dubai", people: "41", since: "2016", x: 63.5, y: 44 },
-  { city: "Toronto", country: "Canada", tz: "America/Toronto", people: "37", since: "2018", x: 26.5, y: 31 },
-  { city: "Sydney", country: "Australia", tz: "Australia/Sydney", people: "16", since: "2021", x: 89, y: 74 },
+  { city: "London", short: "LDN", country: "United Kingdom", tz: "Europe/London", role: "Headquarters", people: "480", since: "1994" },
+  { city: "New York", short: "NYC", country: "United States", tz: "America/New_York", people: "310", since: "1997" },
+  { city: "Zurich", short: "ZRH", country: "Switzerland", tz: "Europe/Zurich", people: "74", since: "2003" },
+  { city: "Singapore", short: "SIN", country: "Singapore", tz: "Asia/Singapore", people: "128", since: "2005" },
+  { city: "Hong Kong", short: "HKG", country: "SAR China", tz: "Asia/Hong_Kong", people: "96", since: "2007" },
+  { city: "Tokyo", short: "TYO", country: "Japan", tz: "Asia/Tokyo", people: "58", since: "2010" },
+  { city: "Abu Dhabi", short: "AUH", country: "United Arab Emirates", tz: "Asia/Dubai", people: "41", since: "2016" },
+  { city: "Toronto", short: "YYZ", country: "Canada", tz: "America/Toronto", people: "37", since: "2018" },
+  { city: "Sydney", short: "SYD", country: "Australia", tz: "Australia/Sydney", people: "16", since: "2021" },
 ];
+
+/* Desk hours, local time, mapped onto a 24h UTC axis. */
+const DESK_OPEN = 7;
+const DESK_CLOSE = 19;
+
+/** UTC offset in hours for a timezone at a given instant (handles DST). */
+function utcOffset(d: Date, tz: string) {
+  const name = new Intl.DateTimeFormat("en-GB", {
+    timeZone: tz,
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(d)
+    .find((p) => p.type === "timeZoneName")?.value;
+
+  const m = name?.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+  if (!m) return 0;
+  const sign = m[1] === "-" ? -1 : 1;
+  return sign * (Number(m[2]) + Number(m[3] ?? 0) / 60);
+}
+
+/** Desk window in UTC hours, split into segments so a wrap past midnight renders. */
+function deskSegments(d: Date, tz: string) {
+  const off = utcOffset(d, tz);
+  const start = ((DESK_OPEN - off) % 24 + 24) % 24;
+  const end = start + (DESK_CLOSE - DESK_OPEN);
+  return end <= 24
+    ? [[start, end]]
+    : [
+        [start, 24],
+        [0, end - 24],
+      ];
+}
 
 function useClock() {
   const [now, setNow] = useState<Date | null>(null);
@@ -75,26 +105,73 @@ export function Reach() {
         </div>
 
         <div className="reach__body" data-reveal>
-          <div className="map" aria-hidden="true">
-            <div className="map__frame">
-              {OFFICES.map((o, i) => (
-                <button
-                  key={o.city}
-                  className={`pin ${i === active ? "pin--on" : ""}`}
-                  style={{ left: `${o.x}%`, top: `${o.y}%` }}
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  tabIndex={-1}
-                >
-                  <span className="pin__dot" />
-                  <span className="pin__label mono">{o.city}</span>
-                </button>
-              ))}
-              <span className="map__lat" style={{ top: "34.5%" }} />
-              <span className="map__lat" style={{ top: "55.5%" }} />
+          <figure className="sun">
+            <figcaption className="sun__cap mono">
+              Follow the sun — desk coverage, 24h UTC
+            </figcaption>
+
+            <div className="sun__frame">
+              <div className="sun__axis mono" aria-hidden="true">
+                {[0, 6, 12, 18, 24].map((h) => (
+                  <span key={h} style={{ left: `${(h / 24) * 100}%` }}>
+                    {String(h).padStart(2, "0")}
+                  </span>
+                ))}
+              </div>
+
+              <div className="sun__rows">
+                {[0, 6, 12, 18].map((h) => (
+                  <span
+                    key={h}
+                    className="sun__vline"
+                    style={{ left: `${(h / 24) * 100}%` }}
+                    aria-hidden="true"
+                  />
+                ))}
+
+                {OFFICES.map((o, i) => (
+                  <div
+                    key={o.city}
+                    className={`sun__row ${i === active ? "sun__row--on" : ""}`}
+                    onMouseEnter={() => setActive(i)}
+                  >
+                    <span className="mono sun__label">{o.short}</span>
+                    <span className="sun__track">
+                      {now &&
+                        deskSegments(now, o.tz).map(([s, e], j) => (
+                          <span
+                            key={j}
+                            className="sun__bar"
+                            style={{
+                              left: `${(s / 24) * 100}%`,
+                              width: `${((e - s) / 24) * 100}%`,
+                            }}
+                          />
+                        ))}
+                    </span>
+                  </div>
+                ))}
+
+                {now && (
+                  <span
+                    className="sun__now"
+                    style={{
+                      left: `${
+                        ((now.getUTCHours() + now.getUTCMinutes() / 60) / 24) * 100
+                      }%`,
+                    }}
+                  >
+                    <i />
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
+
+            <p className="sun__note">
+              Twenty-four hour cover, every trading day. No position is left
+              unattended at a handover.
+            </p>
+          </figure>
 
           <ul className="offices">
             {OFFICES.map((o, i) => (
