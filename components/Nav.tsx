@@ -41,7 +41,7 @@ export function Nav() {
     <>
       <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
         <div className="nav__inner shell">
-          <Link href="/" className="nav__brand" aria-label="Paulmere Capital, home">
+          <Link href="/" className="nav__brand" aria-label="PS Capital, home">
             <Wordmark />
           </Link>
 

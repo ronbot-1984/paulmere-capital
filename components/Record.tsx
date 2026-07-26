@@ -131,7 +131,7 @@ export function Record() {
             <em className="italic-serif">boring way.</em>
           </h2>
           <p className="prose record__sub" data-reveal>
-            Growth of $100 invested at inception in the Paulmere Composite, net of
+            Growth of $100 invested at inception in the PS Composite, net of
             all fees, against a global 60/40 reference portfolio. Logarithmic
             scale — because the shape of compounding matters more than the
             headline.
@@ -141,7 +141,7 @@ export function Record() {
         <div className="chart" data-reveal>
           <div className="chart__legend">
             <span className="lg lg--c">
-              <i /> Paulmere Composite
+              <i /> PS Composite
             </span>
             <span className="lg lg--b">
               <i /> Global 60/40 reference
@@ -160,7 +160,7 @@ export function Record() {
             role="img"
             aria-label={`Growth of $100 from ${START_YEAR} to ${
               START_YEAR + COMPOSITE.length - 1
-            }. Paulmere Composite reaches $${model.cSeries[
+            }. PS Composite reaches $${model.cSeries[
               model.cSeries.length - 1
             ].toFixed(0)}; the 60/40 reference reaches $${model.bSeries[
               model.bSeries.length - 1

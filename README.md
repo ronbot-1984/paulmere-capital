@@ -1,13 +1,13 @@
-# Paulmere Capital
+# PS Capital
 
 A premium marketing site for a **fictional** global investment firm, built as a design
 demonstration in the visual language of tier-one institutional asset managers
 (Bridgewater, Citadel, Man Group, Brevan Howard, Millennium, Point72, AQR,
 Two Sigma, Baupost, Elliott).
 
-**Live:** https://paul.ronbot1984.com
+**Live:** https://ps.ronbot1984.com
 
-> Paulmere Capital is not a real firm. Every figure, person, office and
+> PS Capital is not a real firm. Every figure, person, office and
 > performance number on the site is invented. See `/disclosures`.
 
 ## Design notes

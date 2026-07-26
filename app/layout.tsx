@@ -27,16 +27,16 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE = "https://paul.ronbot1984.com";
+const SITE = "https://ps.ronbot1984.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Paulmere Capital — Compounding conviction across cycles",
-    template: "%s · Paulmere Capital",
+    default: "PS Capital — Compounding conviction across cycles",
+    template: "%s · PS Capital",
   },
   description:
-    "Paulmere Capital is a global investment firm managing $184 billion across macro, systematic, relative value, credit and private capital strategies for institutions and sovereign investors.",
+    "PS Capital is a global investment firm managing $184 billion across macro, systematic, relative value, credit and private capital strategies for institutions and sovereign investors.",
   keywords: [
     "investment management",
     "global macro",
@@ -48,14 +48,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE,
-    siteName: "Paulmere Capital",
-    title: "Paulmere Capital — Compounding conviction across cycles",
+    siteName: "PS Capital",
+    title: "PS Capital — Compounding conviction across cycles",
     description:
       "A global investment firm managing $184 billion across five research-led strategies.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paulmere Capital",
+    title: "PS Capital",
     description:
       "A global investment firm managing $184 billion across five research-led strategies.",
   },

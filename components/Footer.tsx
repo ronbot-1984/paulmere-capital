@@ -63,7 +63,7 @@ export function Footer() {
 
         <div className="footer__disclaimer">
           <p>
-            <strong>This is a fictional website.</strong> Paulmere Capital is not a
+            <strong>This is a fictional website.</strong> PS Capital is not a
             real investment firm. It was created as a design demonstration — the
             firm, its people, its offices and all performance figures shown are
             invented. Nothing here is an offer to sell, a solicitation to buy, or
@@ -72,7 +72,7 @@ export function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <p className="mono">© {new Date().getFullYear()} Paulmere Capital — design demonstration</p>
+          <p className="mono">© {new Date().getFullYear()} PS Capital — design demonstration</p>
           <ul className="footer__meta mono">
             <li>Authorised and regulated for illustrative purposes only</li>
             <li>

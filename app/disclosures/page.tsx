@@ -4,7 +4,7 @@ import { RevealEngine } from "@/components/RevealEngine";
 export const metadata: Metadata = {
   title: "Important information",
   description:
-    "Disclosures, terms of use and privacy information for the Paulmere Capital design demonstration site.",
+    "Disclosures, terms of use and privacy information for the PS Capital design demonstration site.",
 };
 
 const SECTIONS = [
@@ -12,7 +12,7 @@ const SECTIONS = [
     id: "nature",
     h: "Nature of this website",
     body: [
-      "Paulmere Capital is not a real investment firm. This website is a fictional design demonstration built to illustrate the visual and editorial language of an institutional asset manager.",
+      "PS Capital is not a real investment firm. This website is a fictional design demonstration built to illustrate the visual and editorial language of an institutional asset manager.",
       "The firm's history, assets under management, offices, employees, named individuals, strategies, commentary and all performance figures presented on this site are invented. Any resemblance to an actual firm or person is coincidental and unintended.",
     ],
   },
@@ -38,7 +38,7 @@ const SECTIONS = [
     h: "Terms of use",
     body: [
       "This site is provided on an “as is” basis for demonstration purposes. No warranty is given as to the accuracy or completeness of any content, and no liability is accepted for any loss arising from its use.",
-      "The design, code and written content of this site are the work of its author. The Paulmere name and mark are fictional and used here solely as a demonstration brand.",
+      "The design, code and written content of this site are the work of its author. The PS Capital name and mark are fictional and used here solely as a demonstration brand.",
     ],
   },
   {

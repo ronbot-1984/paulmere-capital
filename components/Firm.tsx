@@ -33,7 +33,7 @@ export function Firm() {
             </h2>
             <div className="prose firm__prose" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
               <p>
-                Paulmere was founded in 1994 by four traders who had just watched a
+                PS Capital was founded in 1994 by four traders who had just watched a
                 bond market unravel in a fortnight. The lesson was not that risk
                 should be avoided — it was that most institutions never really knew
                 what they owned.

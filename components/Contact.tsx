@@ -14,14 +14,14 @@ export function Contact() {
           </h2>
 
           <p className="prose contact__sub" data-reveal>
-            Paulmere accepts capital from qualifying institutional and
+            PS Capital accepts capital from qualifying institutional and
             professional investors only. Several strategies are closed. If you
             would like to be considered, our investor relations team will respond
             within five business days.
           </p>
 
           <div className="contact__actions" data-reveal>
-            <a href="mailto:ir@paulmere.example" className="btn">
+            <a href="mailto:ir@pscapital.example" className="btn">
               Contact investor relations
               <Arrow />
             </a>
@@ -42,11 +42,11 @@ export function Contact() {
             </div>
             <div>
               <dt className="mono">Investor relations</dt>
-              <dd>ir@paulmere.example</dd>
+              <dd>ir@pscapital.example</dd>
             </div>
             <div>
               <dt className="mono">Media</dt>
-              <dd>press@paulmere.example</dd>
+              <dd>press@pscapital.example</dd>
             </div>
             <div>
               <dt className="mono">Careers</dt>

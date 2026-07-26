@@ -28,7 +28,7 @@ export function Wordmark() {
     <span className="wordmark">
       <Mark />
       <span className="wordmark__text">
-        <span className="wordmark__name">PAULMERE</span>
+        <span className="wordmark__name">PS</span>
         <span className="wordmark__sub">CAPITAL</span>
       </span>
     </span>
